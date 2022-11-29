@@ -37,7 +37,6 @@ function updateRemoveBtn() {
   removeBtn.forEach((btn) => {
     btn.addEventListener('click', (event) => {
       remove(event.target.id);/* eslint-disable-line */
-      displayListBooks(listOfBooks);
     });
   });
 }
