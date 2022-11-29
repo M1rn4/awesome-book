@@ -1,16 +1,16 @@
-let list_of_books = [];
+let listOfBooks = [];
 const addBtn = document.querySelector('.add_button');
-let title = document.getElementById('title');
-let author = document.getElementById('author');
-let container = document.querySelector('.container');
-let removeBtn =  document.querySelectorAll('.removeBtn');
+const title = document.getElementById('title');
+const author = document.getElementById('author');
+const container = document.querySelector('.container');
+let removeBtn = document.querySelectorAll('.removeBtn');
 
 function displayListBooks(array) {
   container.innerHTML = '';
   for (let i = 0; i < array.length; i += 1) {
     const bookTemplate = `
-      <p>${list_of_books[i].title}</p>
-      <p>${list_of_books[i].author}</p>
+      <p>${listOfBooks[i].title}</p>
+      <p>${listOfBooks[i].author}</p>
       <button id="${i}" class="removeBtn">Remove</button>
       <hr>
     `;
@@ -18,32 +18,36 @@ function displayListBooks(array) {
   }
 }
 
-class createObjectBook {
+class CreateObjectBook {
   constructor(title, author) {
     this.title = title;
     this.author = author;
   }
 }
 
-function add(title,author) {
-  if (title == '' || author == '') return;
-  let newBook = new createObjectBook(title,author);
-  console.log(newBook);
-  list_of_books.push(newBook);
-  displayListBooks(list_of_books);
-};
+function add(title, author) {
+  if (title === '' || author === '') return;
+  const newBook = new CreateObjectBook(title, author);
+  listOfBooks.push(newBook);
+  displayListBooks(listOfBooks);
+}
 
 function updateRemoveBtn() {
-  removeBtn =  document.querySelectorAll('.removeBtn');
+  removeBtn = document.querySelectorAll('.removeBtn');
   removeBtn.forEach((btn) => {
     btn.addEventListener('click', (event) => {
       remove(event.target.id);
+      displayListBooks(listOfBooks);
     });
   });
-};
+}
+
+function saveData() {
+  localStorage.setItem('listOfBooksKey', JSON.stringify(listOfBooks));
+}
 
 const addBtnNew = () => {
-  add(title.value,author.value);
+  add(title.value, author.value);
   updateRemoveBtn();
   saveData();
 };
@@ -51,19 +55,16 @@ const addBtnNew = () => {
 addBtn.addEventListener('click', addBtnNew);
 
 function remove(id) {
-  list_of_books = list_of_books.filter(book => list_of_books.indexOf(book) != id);
-  displayListBooks(list_of_books);
+  id = parseInt(id, 10);
+  listOfBooks = listOfBooks.filter((book) => listOfBooks.indexOf(book) !== id);
+  displayListBooks(listOfBooks);
   updateRemoveBtn();
   saveData();
 }
 
-function saveData(){
-  localStorage.setItem('list_of_books_key',JSON.stringify(list_of_books));
-}
-
-window.addEventListener("load", function() {
-  if (localStorage.getItem('list_of_books_key') === null) return;
-  list_of_books = JSON.parse(localStorage.getItem('list_of_books_key'));
-  displayListBooks(list_of_books);
+window.addEventListener('load', () => {
+  if (localStorage.getItem('listOfBooksKey') === null) return;
+  listOfBooks = JSON.parse(localStorage.getItem('listOfBooksKey'));
+  displayListBooks(listOfBooks);
   updateRemoveBtn();
 });
