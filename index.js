@@ -26,9 +26,7 @@ class createObjectBook {
 }
 
 function add(title,author) {
-  if (title == '' || author == '') return;
   let newBook = new createObjectBook(title,author);
-  console.log(newBook);
   list_of_books.push(newBook);
   displayListBooks(list_of_books);
 };
@@ -47,7 +45,6 @@ const addBtnNew = () => {
   title.value = '';
   author.value = '';
   updateRemoveBtn();
-  saveData();
 };
 
 addBtn.addEventListener('click', addBtnNew);
@@ -56,16 +53,4 @@ function remove(id) {
   list_of_books = list_of_books.filter(book => list_of_books.indexOf(book) != id);
   displayListBooks(list_of_books);
   updateRemoveBtn();
-  saveData();
 }
-
-function saveData(){
-  localStorage.setItem('list_of_books_key',JSON.stringify(list_of_books));
-}
-
-window.addEventListener("load", function() {
-  if (localStorage.getItem('list_of_books_key') === null) return;
-  list_of_books = JSON.parse(localStorage.getItem('list_of_books_key'));
-  displayListBooks(list_of_books);
-  updateRemoveBtn();
-});
