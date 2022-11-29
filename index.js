@@ -36,7 +36,7 @@ function updateRemoveBtn() {
   removeBtn = document.querySelectorAll('.removeBtn');
   removeBtn.forEach((btn) => {
     btn.addEventListener('click', (event) => {
-      remove(event.target.id);
+      remove(event.target.id);/* eslint-disable-line */
       displayListBooks(listOfBooks);
     });
   });
