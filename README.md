@@ -3,7 +3,7 @@
 # Deploy website
 
 > You can found my website here:
- [live demo](https://m1rn4.github.io/awesome-book/)
+ [You can see our live demo](https://m1rn4.github.io/awesome-book/)
 
 # Project Name
 
