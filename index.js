@@ -12,16 +12,27 @@ class CreateObjectBook {
     this.author = author;
   }
 }
-// eslint-disable-next-line no-unused-vars
-class features {
+
+class Features {
   static displayListBooks(array) {
     container.innerHTML = '';
+    let backgroundColor = '';
     for (let i = 0; i < array.length; i += 1) {
+      if (i % 2 === 0) {
+        backgroundColor = 'white';
+      } else {
+        backgroundColor = 'gray';
+      }
       const bookTemplate = `
-        <p>${listOfBooks[i].title}</p>
-        <p>${listOfBooks[i].author}</p>
-        <button id="${i}" class="removeBtn">Remove</button>
-        <hr>
+        <div class="book ${backgroundColor}">
+          <div class="title">
+            <p>"${listOfBooks[i].title}"&ensp;by</p>
+            <p>&ensp;${listOfBooks[i].author}</p>
+          </div>
+          <div>
+            <button id="${i}" class="removeBtn">Remove</button>
+          </div>
+        </div>
       `;
       container.innerHTML += bookTemplate;
     }
@@ -57,9 +68,9 @@ class features {
 }
 
 const addBtnNew = () => {
-  features.add(title.value, author.value);
-  features.updateRemoveBtn();
-  features.saveData();
+  Features.add(title.value, author.value);
+  Features.updateRemoveBtn();
+  Features.saveData();
 };
 
 addBtn.addEventListener('click', addBtnNew);
@@ -67,6 +78,6 @@ addBtn.addEventListener('click', addBtnNew);
 window.addEventListener('load', () => {
   if (localStorage.getItem('listOfBooksKey') === null) return;
   listOfBooks = JSON.parse(localStorage.getItem('listOfBooksKey'));
-  features.displayListBooks(listOfBooks);
-  features.updateRemoveBtn();
+  Features.displayListBooks(listOfBooks);
+  Features.updateRemoveBtn();
 });
