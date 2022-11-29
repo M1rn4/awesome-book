@@ -1,22 +1,10 @@
+// eslint-disable-next-line max-classes-per-file
 let listOfBooks = [];
 const addBtn = document.querySelector('.add_button');
 const title = document.getElementById('title');
 const author = document.getElementById('author');
 const container = document.querySelector('.container');
 let removeBtn = document.querySelectorAll('.removeBtn');
-
-function displayListBooks(array) {
-  container.innerHTML = '';
-  for (let i = 0; i < array.length; i += 1) {
-    const bookTemplate = `
-      <p>${listOfBooks[i].title}</p>
-      <p>${listOfBooks[i].author}</p>
-      <button id="${i}" class="removeBtn">Remove</button>
-      <hr>
-    `;
-    container.innerHTML += bookTemplate;
-  }
-}
 
 class CreateObjectBook {
   constructor(title, author) {
@@ -25,45 +13,71 @@ class CreateObjectBook {
   }
 }
 
-function add(title, author) {
-  if (title === '' || author === '') return;
-  const newBook = new CreateObjectBook(title, author);
-  listOfBooks.push(newBook);
-  displayListBooks(listOfBooks);
-}
+class Features {
+  static displayListBooks(array) {
+    container.innerHTML = '';
+    let backgroundColor = '';
+    for (let i = 0; i < array.length; i += 1) {
+      if (i % 2 === 0) {
+        backgroundColor = 'white';
+      } else {
+        backgroundColor = 'gray';
+      }
+      const bookTemplate = `
+        <div class="book ${backgroundColor}">
+          <div class="title">
+            <p>"${listOfBooks[i].title}"&ensp;by</p>
+            <p>&ensp;${listOfBooks[i].author}</p>
+          </div>
+          <div>
+            <button id="${i}" class="removeBtn">Remove</button>
+          </div>
+        </div>
+      `;
+      container.innerHTML += bookTemplate;
+    }
+  }
 
-function updateRemoveBtn() {
-  removeBtn = document.querySelectorAll('.removeBtn');
-  removeBtn.forEach((btn) => {
-    btn.addEventListener('click', (event) => {
-      remove(event.target.id);/* eslint-disable-line */
+  static add(title, author) {
+    if (title === '' || author === '') return;
+    const newBook = new CreateObjectBook(title, author);
+    listOfBooks.push(newBook);
+    this.displayListBooks(listOfBooks);
+  }
+
+  static updateRemoveBtn() {
+    removeBtn = document.querySelectorAll('.removeBtn');
+    removeBtn.forEach((btn) => {
+      btn.addEventListener('click', (event) => {
+        this.remove(event.target.id);/* eslint-disable-line */
+      });
     });
-  });
-}
+  }
 
-function saveData() {
-  localStorage.setItem('listOfBooksKey', JSON.stringify(listOfBooks));
+  static saveData() {
+    localStorage.setItem('listOfBooksKey', JSON.stringify(listOfBooks));
+  }
+
+  static remove(id) {
+    id = parseInt(id, 10);
+    listOfBooks = listOfBooks.filter((book) => listOfBooks.indexOf(book) !== id);
+    this.displayListBooks(listOfBooks);
+    this.updateRemoveBtn();
+    this.saveData();
+  }
 }
 
 const addBtnNew = () => {
-  add(title.value, author.value);
-  updateRemoveBtn();
-  saveData();
+  Features.add(title.value, author.value);
+  Features.updateRemoveBtn();
+  Features.saveData();
 };
 
 addBtn.addEventListener('click', addBtnNew);
 
-function remove(id) {
-  id = parseInt(id, 10);
-  listOfBooks = listOfBooks.filter((book) => listOfBooks.indexOf(book) !== id);
-  displayListBooks(listOfBooks);
-  updateRemoveBtn();
-  saveData();
-}
-
 window.addEventListener('load', () => {
   if (localStorage.getItem('listOfBooksKey') === null) return;
   listOfBooks = JSON.parse(localStorage.getItem('listOfBooksKey'));
-  displayListBooks(listOfBooks);
-  updateRemoveBtn();
+  Features.displayListBooks(listOfBooks);
+  Features.updateRemoveBtn();
 });
