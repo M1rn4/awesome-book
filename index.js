@@ -5,7 +5,12 @@ const title = document.getElementById('title');
 const author = document.getElementById('author');
 const container = document.querySelector('.container');
 let removeBtn = document.querySelectorAll('.removeBtn');
-
+const navList = document.querySelector('#nav_list');
+const navAdd = document.querySelector('#nav_add');
+const navContact = document.querySelector('#nav_contact');
+const sectionList = document.querySelector('#list');
+const sectionAdd = document.querySelector('#add_new');
+const sectionContact = document.querySelector('#contact');
 class CreateObjectBook {
   constructor(title, author) {
     this.title = title;
@@ -25,7 +30,7 @@ class Features {
       }
       const bookTemplate = `
         <div class="book ${backgroundColor}">
-          <div class="title">
+          <div class="title" >
             <p>"${listOfBooks[i].title}"&ensp;by</p>
             <p>&ensp;${listOfBooks[i].author}</p>
           </div>
@@ -81,3 +86,23 @@ window.addEventListener('load', () => {
   Features.displayListBooks(listOfBooks);
   Features.updateRemoveBtn();
 });
+
+function showList() {
+  sectionList.classList.remove('hide');
+  sectionAdd.classList.add('hide');
+  sectionContact.classList.add('hide');
+}
+function showAdd() {
+  sectionList.classList.add('hide');
+  sectionAdd.classList.remove('hide');
+  sectionContact.classList.add('hide');
+}
+function showContact() {
+  sectionList.classList.add('hide');
+  sectionAdd.classList.add('hide');
+  sectionContact.classList.remove('hide');
+}
+
+navList.onclick = showList;
+navAdd.onclick = showAdd;
+navContact.onclick = showContact;
