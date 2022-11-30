@@ -97,3 +97,32 @@ input {
   border: 3px solid black;
   border-radius: 3px;
 }
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.contact h2 {
+  margin-bottom: 1rem;
+}
+
+.contact ul {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 2rem;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border: 2px solid black;
+  background-color: white;
+  padding: 0.3rem;
+  margin: 0.5rem 0.8rem;
+}
