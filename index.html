@@ -11,26 +11,53 @@
   <title>Awesome books ES6</title>
 </head>
 <body>
-  <h1 class="awesome-books-h1">All awesome books</h1>
-  <div class="container"></div>
-  <div class="books-container"></div>
-  <hr class="separetor-line">
-  <h2>Add a new book</h2>
-  <form class="add-book">
-    <input 
-      type="text"
-      class="title" 
-      name="title" 
-      id="title" 
-      placeholder="Title">
-    <input 
-      type="text"
-      class="title" 
-      name="author" 
-      id="author" 
-      placeholder="Author">
-    <button type="button" class="add_button">Add</button>         
-  </form>
+  <nav>
+    <h2>Awesome Books</h2>
+    <ul>
+      <li><a href="#list" id="nav_list">List</a></li>
+      <li><a href="#add_new" id="nav_add">Add new</a></li>
+      <li><a href="#contact" id="nav_contact">Contact</a></li>
+    </ul>
+  </nav>
+  <section class="list hide" id="list">
+    <h1>All awesome books</h1>
+    <div class="container" ></div>
+  </section>
+  <section>
+
+  </section>
+  <section class="add-new-book" id="add_new">
+    <h2>Add a new book</h2>
+    <form class="add-book">
+      <input 
+        type="text"
+        class="title" 
+        name="title" 
+        id="title" 
+        placeholder="Title">
+      <input 
+        type="text"
+        class="title" 
+        name="author" 
+        id="author" 
+        placeholder="Author">
+      <button type="button" class="add_button">Add</button>         
+    </form>
+  </section>
+  <section class="contact hide" id="contact">
+    <h2>Contact information</h2>
+    <p>Do have any questions or you just want to say "Hello"?
+      <br>You can reach out to us!
+    </p>
+    <ul>
+      <li>Our e-mail mail@mail.com</li>
+      <li>Our phone number 00453586534424</li>
+      <li>Our address Streeetnone 22,845503 City , country</li>
+    </ul>
+  </section>
+  <footer>
+    <h4>Copyright   ...</h2>
+  </footer>
   <script type="module" src="index.js"></script>
 </body>
 </html>
