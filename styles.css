@@ -13,6 +13,27 @@ body {
   padding: 0 10px;
 }
 
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  border: 3px solid black;
+  margin: .5rem;
+  padding: .5rem;
+  align-items: center;
+}
+nav ul {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  list-style: none;
+}
+nav ul a{
+  text-decoration: none;
+  color: black;
+}
+
 .container {
   display: flex;
   flex-direction: column;
